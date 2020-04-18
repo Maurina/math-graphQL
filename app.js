@@ -7,6 +7,7 @@ const graphqlHttp = require('express-graphql')
 const graphqlSchema = require('./graphql/schema')
 const graphqlResolver = require('./graphql/resolvers')
 const auth = require('./middleware/auth')
+const cors = require('cors')
 
 const app = express()
 
@@ -24,6 +25,10 @@ app.use((req, res, next) => {
     }
     next()
 })
+
+app.use(cors({
+    origin: '*',
+  }))
 
 app.use(auth)
 
@@ -54,11 +59,18 @@ app.use((error, req, res, next) => {
     res.status(status).json({ message: message, data: data })
 })
 
+let port = process.env.port
+if (port == null || port == ''){
+    port = 8000
+}
+
 mongoose
     .connect(
         'mongodb+srv://FLC:1td29W3fP2SQP4iC@cluster0-74x5c.mongodb.net/test?retryWrites=true&w=majority'
     )
     .then( result => {
-        app.listen(8000)
+        app.listen(port, () =>{
+            console.log(`Server is running on port ${port}`)
+        })
     })
     .catch(err => console.log(err))
