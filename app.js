@@ -6,7 +6,7 @@ const graphqlHttp = require('express-graphql')
 
 const graphqlSchema = require('./graphql/schema')
 const graphqlResolver = require('./graphql/resolvers')
-const auth = require('./middleware/auth')
+/* const auth = require('./middleware/auth') */
 const cors = require('cors')
 
 const app = express()
@@ -30,7 +30,7 @@ app.use(cors({
     origin: '*',
   }))
 
-app.use(auth)
+/* app.use(auth) */
 
 
 app.use(

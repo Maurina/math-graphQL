@@ -49,13 +49,14 @@ module.exports = {
                 error.code = 401
                 throw error
             }
-            const token = jwt.sign({
+     /*        const token = jwt.sign({
                 userId: user._id.toString()
             }, 
             'H>e5esJUy1sBXPaw', 
             {expiresIn: '1h'}
-            )
-            return { token: token, userId: user._id.toString() }
+            ) */
+            return { userId: user._id.toString()}
+         /*    return { token: token, userId: user._id.toString() } */
         },
    
     createStudent: async function({ studentInput }, req) {
